@@ -8,8 +8,29 @@ let timeIntervalId = 0;
 const buttonStart = document.querySelector('[data-start]');
 const buttonStop = document.querySelector('[data-stop]');
 
+
 buttonStop.disabled = isDisabled;
+
+
 
 buttonStart.addEventListener('click', onStartClick);
 buttonStop.addEventListener('click', onStopClick);
+
+
+
+function changeBodyBackgroundColor() {
+    document.body.style.backgroundColor = getRandomHexColor();
+}
+
+function onStartClick() {
+    buttonStart.disabled = isDisabled;
+    buttonStop.disabled = !isDisabled;
+    timeIntervalId = setInterval(changeBodyBackgroundColor, 1000);
+}
+
+function onStopClick() {
+    buttonStart.disabled = !isDisabled;
+    buttonStop.disabled = isDisabled;
+    clearInterval(timeIntervalId);
+}
 
