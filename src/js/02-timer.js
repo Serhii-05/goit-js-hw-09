@@ -2,13 +2,15 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
+    onCloseFunction(selectedDates[0]);
   },
 };
 
@@ -25,14 +27,14 @@ seconds: document.querySelector('[data-seconds]'),
 const isDisabled = true;
 let chosenDate = Date.now();
 
-refs.startButton.disabled = isDisable;
+refs.startButton.disabled = isDisabled;
 refs.startButton.addEventListener('click', onStartClick);
 
 const fp = flatpickr(refs.inputEl, options);
 
-function onCloseFunction(data) {
+function onCloseFunction(date) {
   if (Date.now() > date) {
-    console.log('Please choose a date in the future');
+    Notify.failure('Please choose a date in the future');
   } else {
     refs.startButton.disabled = !isDisabled;
     chosenDate = date;
@@ -82,3 +84,5 @@ function markupChange({ days, hours, minutes, seconds }) {
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
+
+
