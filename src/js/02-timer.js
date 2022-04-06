@@ -30,7 +30,7 @@ let chosenDate = Date.now();
 refs.startButton.disabled = isDisabled;
 refs.startButton.addEventListener('click', onStartClick);
 
-const fp = flatpickr(refs.inputEl, options);
+const flat = flatpickr(refs.inputEl, options);
 
 function onCloseFunction(date) {
   if (Date.now() > date) {
@@ -43,7 +43,7 @@ function onCloseFunction(date) {
 
 function onStartClick() {
   refs.startButton.disabled = isDisabled;
-  fp.destroy();
+  flat.destroy();
   refs.inputEl.disabled = isDisabled;
   calculationStart();
 }
